@@ -5,7 +5,7 @@ export class HttpWordValidationRepository implements WordValidationRepository {
 
   async validateWord(word: string): Promise<boolean> {
     try {
-      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.toLowerCase()}`);
+      const response = await fetch(`${this.baseUrl}/${word.toLowerCase()}`);
       return response.status === 200;
     } catch {
       return false;

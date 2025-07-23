@@ -21,15 +21,12 @@ export function RestartButton() {
   };
 
   const className = cn(
-    'fixed bottom-4 right-4 z-40',
     'rounded-full p-3 md:p-4',
     'transition-all duration-200',
     'shadow-lg hover:shadow-xl',
     'focus:outline-none focus:ring-2',
     'disabled:opacity-50 disabled:cursor-not-allowed',
-    // Responsive sizing
     'w-12 h-12 md:w-14 md:h-14',
-    // Centering
     'flex items-center justify-center'
   );
 

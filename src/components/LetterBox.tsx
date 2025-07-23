@@ -30,7 +30,7 @@ export function LetterBox({ letter, index, rowIndex }: LetterBoxProps) {
   const className = cn(
     'border flex items-center justify-center transition-colors duration-200',
     // Responsive sizing and border radius
-    'w-10 h-10 text-base font-bold rounded-md md:w-12 md:h-12 md:text-lg md:rounded-lg',
+    'w-12 h-12 text-lg font-bold rounded-lg',
     // Default border - theme-aware
     'border-gray-300 dark:border-gray-600',
     // Invalid row styling - only border color and thickness

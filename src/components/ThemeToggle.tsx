@@ -12,7 +12,6 @@ export function ThemeToggle() {
   };
 
   const className = cn(
-    'fixed top-4 right-4 z-50',
     'bg-white dark:bg-gray-100 text-gray-700 dark:text-gray-800',
     'rounded-full p-3 md:p-4',
     'transition-all duration-200',

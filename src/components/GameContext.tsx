@@ -10,11 +10,11 @@ import { Adapters } from "@/core/Adapters";
 import { GameNotDefined } from "@/core/errors/GameNotDefined";
 import { MemoryScoreRepository } from "@/adapters/memory/MemoryScoreRepository";
 import { HttpWordValidationRepository } from "@/adapters/http/HttpWordValidationRepository";
-import { HttpWordRepository } from "@/adapters/http/HttpWordRepository";
+import { ApiWordRepository } from "@/adapters/api/ApiWordRepository";
 import { getCurrentRowIndex } from "@/core/use-cases/getCurrentRowIdenx";
 import { getCurrentLetterIndex } from "@/core/use-cases/getCurrentLetterIndex";
 import { InvalidWord } from "@/core/errors/InvalidWord";
-import { validateGame } from "@/core/use-cases/validateGame";
+import { validateRow } from "@/core/use-cases/validateRow";
 
 export type GameContext = {
   game: Game | undefined;
@@ -48,7 +48,7 @@ export const GameContext = createContext<GameContext>(defaultContext);
 
 const adapters: Adapters = {
   scoreRepository: new MemoryScoreRepository(),
-  wordRepository: new HttpWordRepository(),
+  wordRepository: new ApiWordRepository(),
   wordValidationRepository: new HttpWordValidationRepository(),
 };
 
@@ -122,7 +122,7 @@ export function GameProvider(props: { children: React.ReactNode }) {
       if (!game) throw new GameNotDefined();
       setIsLoading(true);
       try {
-        const newGame = await validateGame(game, adapters);
+        const newGame = await validateRow(game, adapters);
         setGame(newGame);
       } catch (error) {
         if (error instanceof InvalidWord) {

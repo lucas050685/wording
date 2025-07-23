@@ -10,8 +10,9 @@ import { RestartButton } from "./RestartButton";
 
 import { Alphabet } from "@/core/Alphabet";
 import { Keyboard } from "./Keyboard";
+import { ThemeToggle } from "./ThemeToggle";
 export function GameScreen() {
-  const { game, removeLetter, addLetter, isLoading, toastMessage, showToast, hideToast } = useGame();
+  const { game, removeLetter, validateRow, addLetter, isLoading, toastMessage, showToast, hideToast } = useGame();
   
   useEffect(() => {
     const handleKeyDown = async (event: KeyboardEvent) => {
@@ -19,6 +20,8 @@ export function GameScreen() {
       if (game?.gameOver) return;
       
       if (event.key === 'Backspace') return removeLetter();
+      if (event.key === 'Escape') return console.log(game?.word ?? 'No word');
+      if (event.key === 'Enter') return await validateRow();
       const letter = event.key.toUpperCase() as Alphabet;
       await addLetter(letter);
     };
@@ -31,22 +34,29 @@ export function GameScreen() {
   if (!game) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 relative" style={{ background: 'var(--background)' }}>
-      <Board game={game} />
-      <Keyboard disabled={game.gameOver} />
+    <div className="flex flex-col items-center h-screen mx-auto relative p-4" style={{ background: 'var(--background)' }}>
+      <div className="flex justify-end w-full">
+        <ThemeToggle />
+      </div>
+      
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <Board game={game} />
+      </div>
+      <div className="flex flex-col items-center justify-center">
+        <Keyboard disabled={game.gameOver} />
+      </div>
+      <div className="flex justify-end w-full">
+        <RestartButton />
+      </div>
+      
       <GameResult />
       
-      {/* Restart button in bottom right corner */}
-      <RestartButton />
-      
-      {/* Toast for error messages */}
       <Toast 
         message={toastMessage} 
         isVisible={showToast} 
         onClose={hideToast} 
       />
       
-      {/* Discrete validation loader in top center */}
       {isLoading && (
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
           <Loader size="sm" />
