@@ -29,12 +29,12 @@ export function GameScreen() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [addLetter, removeLetter, game]);
+  }, [addLetter, removeLetter, game, validateRow]);
 
   if (!game) return null;
 
   return (
-    <div className="flex flex-col items-center h-screen mx-auto relative p-4" style={{ background: 'var(--background)' }}>
+    <div className="flex flex-col items-center h-dvh mx-auto relative p-4" style={{ background: 'var(--background)' }}>
       <div className="flex justify-end w-full">
         <ThemeToggle />
       </div>

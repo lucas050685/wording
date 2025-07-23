@@ -14,9 +14,9 @@ interface KeyboardProps {
 }
 
 export function Keyboard({ disabled = false }: KeyboardProps) {
-  return <div className="flex flex-col gap-2 md:gap-4 items-center mt-4 md:mt-8 p-3 md:p-6 rounded-xl md:rounded-2xl">
+  return <div className="flex flex-col gap-1.5 md:gap-2 items-center mt-4 md:mt-8 p-3 md:p-6 rounded-xl md:rounded-2xl">
     {keyboardRows.map((row, index) => (
-      <div key={index} className="flex gap-1.5 md:gap-3 justify-center items-center">
+      <div key={index} className="flex gap-1.5 md:gap-2 justify-center items-center">
         <KeyboardRow letters={row} disabled={disabled} />
         {index === 1 && <BackspaceKey disabled={disabled} />}
         {index === 2 && <EnterKey disabled={disabled} />}
