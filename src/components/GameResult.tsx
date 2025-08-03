@@ -86,20 +86,10 @@ export function GameResult() {
         
         {game.won && (
           <div 
-            className="rounded-lg p-3 md:p-4 mb-4 md:mb-6 border"
-            style={{
-              backgroundColor: isDark ? '#111827' : '#f3f4f6',
-              borderColor: isDark ? 'rgba(255, 255, 255, 0.2)' : '#e5e7eb'
-            }}
+            className="p-3 md:p-4 mb-4 md:mb-6"
           >
             <p 
-              className="text-xs md:text-sm mb-1 md:mb-2"
-              style={{ color: isDark ? '#d1d5db' : '#6b7280' }}
-            >
-              The word was:
-            </p>
-            <p 
-              className="text-xl md:text-2xl font-bold"
+              className="text-xl md:text-4xl font-bold"
               style={{ color: isDark ? '#ffffff' : '#1f2937' }}
             >
               {game.word}
