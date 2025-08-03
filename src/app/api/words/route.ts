@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { unstable_noStore as noStore } from 'next/cache';
+import { HttpWordValidationRepository } from '@/adapters/http';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -34,8 +35,16 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: `No words found with ${size} letters` }, { status: 404 });
   }
   
-  const randomWord = words[Math.floor(Math.random() * words.length)];
+
+  let validation = false;
+  let randomWord = '';
+  const httpWordValidationRepository = new HttpWordValidationRepository();
   
+  do {
+    randomWord = words[Math.floor(Math.random() * words.length)];
+    validation = await httpWordValidationRepository.validateWord(randomWord);
+  } while (!validation)
+
   return NextResponse.json({ 
     word: randomWord,
     totalWords: words.length,
